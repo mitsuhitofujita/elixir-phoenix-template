@@ -35,3 +35,6 @@ workspace-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Ignore Elixir's PLT files.
+/priv/plts/*.plt
+/priv/plts/*.plt.hash
