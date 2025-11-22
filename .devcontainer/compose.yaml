@@ -5,6 +5,13 @@ services:
     command: sleep infinity
     depends_on:
       - postgres
+    environment:
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_USER: app
+      DB_PASSWORD: app
+      DB_NAME: app_dev
+      DB_TEST_NAME: app_test
     volumes:
       - ../:/workspace:cached
   postgres:

@@ -1,15 +1,23 @@
 import Config
 
+db_host = System.get_env("DB_HOST") || "postgres"
+db_port = String.to_integer(System.get_env("DB_PORT") || "5432")
+db_user = System.get_env("DB_USER") || "app"
+db_password = System.get_env("DB_PASSWORD") || "app"
+db_test_name = System.get_env("DB_TEST_NAME") || "app_test"
+test_partition = System.get_env("MIX_TEST_PARTITION") || ""
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :workspace, Workspace.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "workspace_test#{System.get_env("MIX_TEST_PARTITION")}",
+  username: db_user,
+  password: db_password,
+  hostname: db_host,
+  port: db_port,
+  database: "#{db_test_name}#{test_partition}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2
 

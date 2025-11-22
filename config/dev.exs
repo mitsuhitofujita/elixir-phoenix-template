@@ -1,11 +1,17 @@
 import Config
 
+db_host = System.get_env("DB_HOST") || "postgres"
+db_port = String.to_integer(System.get_env("DB_PORT") || "5432")
+db_user = System.get_env("DB_USER") || "app"
+db_password = System.get_env("DB_PASSWORD") || "app"
+db_name = System.get_env("DB_NAME") || "app_dev"
 # Configure your database
 config :workspace, Workspace.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "workspace_dev",
+  username: db_user,
+  password: db_password,
+  hostname: db_host,
+  port: db_port,
+  database: db_name,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

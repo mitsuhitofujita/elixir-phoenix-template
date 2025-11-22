@@ -11,6 +11,10 @@ config :workspace,
   ecto_repos: [Workspace.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+config :workspace, Workspace.Repo,
+  migration_default_prefix: "main",
+  parameters: [search_path: "main,public"]
+
 # Configures the endpoint
 config :workspace, WorkspaceWeb.Endpoint,
   url: [host: "localhost"],
