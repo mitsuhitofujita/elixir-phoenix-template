@@ -1,8 +1,11 @@
 defmodule Workspace.Accounts.UserNotifier do
+  @moduledoc """
+  Handles outbound account emails like confirmations, login links, and updates.
+  """
   import Swoosh.Email
 
-  alias Workspace.Mailer
   alias Workspace.Accounts.User
+  alias Workspace.Mailer
 
   # Delivers the email using the application mailer.
   defp deliver(recipient, subject, body) do

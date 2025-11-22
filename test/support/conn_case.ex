@@ -17,6 +17,11 @@ defmodule WorkspaceWeb.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  alias Phoenix.ConnTest
+  alias Plug.Conn
+  alias Workspace.{Accounts, AccountsFixtures, DataCase}
+  alias Workspace.Accounts.Scope
+
   using do
     quote do
       # The default endpoint for testing
@@ -32,8 +37,8 @@ defmodule WorkspaceWeb.ConnCase do
   end
 
   setup tags do
-    Workspace.DataCase.setup_sandbox(tags)
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    DataCase.setup_sandbox(tags)
+    {:ok, conn: ConnTest.build_conn()}
   end
 
   @doc """
@@ -45,8 +50,8 @@ defmodule WorkspaceWeb.ConnCase do
   test context.
   """
   def register_and_log_in_user(%{conn: conn} = context) do
-    user = Workspace.AccountsFixtures.user_fixture()
-    scope = Workspace.Accounts.Scope.for_user(user)
+    user = AccountsFixtures.user_fixture()
+    scope = Scope.for_user(user)
 
     opts =
       context
@@ -62,18 +67,18 @@ defmodule WorkspaceWeb.ConnCase do
   It returns an updated `conn`.
   """
   def log_in_user(conn, user, opts \\ []) do
-    token = Workspace.Accounts.generate_user_session_token(user)
+    token = Accounts.generate_user_session_token(user)
 
     maybe_set_token_authenticated_at(token, opts[:token_authenticated_at])
 
     conn
-    |> Phoenix.ConnTest.init_test_session(%{})
-    |> Plug.Conn.put_session(:user_token, token)
+    |> ConnTest.init_test_session(%{})
+    |> Conn.put_session(:user_token, token)
   end
 
   defp maybe_set_token_authenticated_at(_token, nil), do: nil
 
   defp maybe_set_token_authenticated_at(token, authenticated_at) do
-    Workspace.AccountsFixtures.override_token_authenticated_at(token, authenticated_at)
+    AccountsFixtures.override_token_authenticated_at(token, authenticated_at)
   end
 end

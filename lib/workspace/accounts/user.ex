@@ -1,4 +1,7 @@
 defmodule Workspace.Accounts.User do
+  @moduledoc """
+  Ecto schema and changesets for Workspace users, covering registration and credentials.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,4 +1,7 @@
 defmodule WorkspaceWeb.UserAuth do
+  @moduledoc """
+  Plugs and helpers for authenticating users and managing session + remember-me tokens.
+  """
   use WorkspaceWeb, :verified_routes
 
   import Plug.Conn

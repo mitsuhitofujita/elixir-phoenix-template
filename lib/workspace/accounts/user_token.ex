@@ -1,4 +1,7 @@
 defmodule Workspace.Accounts.UserToken do
+  @moduledoc """
+  Builds, stores, and verifies session, magic link, and change-email tokens.
+  """
   use Ecto.Schema
   import Ecto.Query
   alias Workspace.Accounts.UserToken

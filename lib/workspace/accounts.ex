@@ -6,7 +6,7 @@ defmodule Workspace.Accounts do
   import Ecto.Query, warn: false
   alias Workspace.Repo
 
-  alias Workspace.Accounts.{User, UserToken, UserNotifier}
+  alias Workspace.Accounts.{User, UserNotifier, UserToken}
 
   ## Database getters
 

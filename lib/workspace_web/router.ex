@@ -3,13 +3,15 @@ defmodule WorkspaceWeb.Router do
 
   import WorkspaceWeb.UserAuth
 
+  @csp "default-src 'self'; img-src 'self' data:; font-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline'"
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, html: {WorkspaceWeb.Layouts, :root}
     plug :protect_from_forgery
-    plug :put_secure_browser_headers
+    plug :put_secure_browser_headers, %{"content-security-policy" => @csp}
     plug :fetch_current_scope_for_user
   end
 
