@@ -1,0 +1,30 @@
+{
+	"name": "elixir-phoenix",
+	"dockerComposeFile": [
+		"compose.yaml"
+	],
+	"service": "elixir",
+	"features": {
+	},
+	"remoteUser": "vscode",
+	"workspaceFolder": "/workspace",
+	"forwardPorts": [4000],
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.profiles.linux": {
+					"bash": {
+						"path": "/bin/bash"
+					}
+				},
+				"terminal.integrated.defaultProfile.linux": "bash"
+			},
+			"extensions": [
+				"jakebecker.elixir-ls",
+				"pantajoe.vscode-elixir-credo",
+				"phoenixframework.phoenix",
+				"openai.chatgpt"
+			]
+		}
+	}
+}

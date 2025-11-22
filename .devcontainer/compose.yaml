@@ -1,0 +1,20 @@
+name: elixir-phoenix
+services:
+  elixir:
+    build: ./services/elixir
+    command: sleep infinity
+    depends_on:
+      - postgres
+    volumes:
+      - ../:/workspace:cached
+  postgres:
+    build: ./services/postgres
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: app_dev
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - ./services/postgres/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql:ro
